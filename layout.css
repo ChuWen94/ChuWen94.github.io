@@ -7,7 +7,7 @@ body {
   
 path {
     stroke-width: 0.5px;
-    cursor: pointer;
+    cursor: default;
   }
   
 path:hover, path.highlighted {
@@ -17,10 +17,12 @@ path:hover, path.highlighted {
   
 div.tooltip {
       position: absolute;
-      background-color: white;
-      border: 1px solid black;
-      color: black;
+      background-color: #e7e6e6;
+      border: 1px solid #0a213e;
+      color: #0a213e;
+      font-family: 'Roboto', sans-serif;
       font-weight: bold;
+      font-size: small;
       padding: 4px 8px;
       display: none;
   }
@@ -45,8 +47,15 @@ div.tooltip {
     float: right;
 }
 
+.footnote{
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
+    font-size: x-small;
+}
+
 svg {
     margin: auto;
     display: block;
 }
+
 

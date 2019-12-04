@@ -28,7 +28,7 @@ var features = svg.append("g")
     .attr("class","features");
 
 //Read and style Geodata
-d3.json("rlp_mwh.geojson",function(error,geodata) {
+d3.json("electr_estimates.geojson",function(error,geodata) {
   if (error) return console.log(error); //unknown error, check the console
   var max_mwh = d3.max(geodata.features, function(d) { return d.properties.MWh});
   var min_mwh = d3.min(geodata.features, function(d) { return d.properties.MWh});
@@ -67,7 +67,7 @@ function showTooltip(d) {
   moveTooltip();
 
   tooltip.style("display","block")
-      .text(d.properties.Name + ", " +
+      .text(d.properties.LAU2 + ", " +
         (Intl.NumberFormat('de-DEU').format(Math.round(d.properties.MWh))+ String(" MWh")));
 }
 
