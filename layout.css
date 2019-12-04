@@ -1,0 +1,52 @@
+body {
+    background-color: #0a213e;
+    color: #e7e6e6;
+    font-family: 'Roboto', sans-serif;
+    padding: 2em;
+}
+  
+path {
+    stroke-width: 0.5px;
+    cursor: pointer;
+  }
+  
+path:hover, path.highlighted {
+    fill: #e7e6e6;
+  }
+
+  
+div.tooltip {
+      position: absolute;
+      background-color: white;
+      border: 1px solid black;
+      color: black;
+      font-weight: bold;
+      padding: 4px 8px;
+      display: none;
+  }
+
+
+.container {
+    margin:auto;
+    width: 80%;
+    height: auto;
+}
+
+.sub-container-one {
+    width: 50%;
+    height: auto;
+    float: left;
+}
+
+
+.sub-container-two {
+    width: 50%;
+    height: auto;
+    float: right;
+}
+
+svg {
+    margin: auto;
+    display: block;
+}
+
