@@ -60,21 +60,29 @@ d3.json("electr_estimates.geojson",function(error,geodata) {
 
 //Create tooltip
 var tooltip = d3.select("body").append("div").attr("class","tooltip");
+
 //Position tooltip relative to the cursor
-var tooltipOffset = {x: 25, y: -25};
+var tooltipOffset = {x: 20, y: 10};
+
 //Create a tooltip
 function showTooltip(d) {
   moveTooltip();
 
-  tooltip.style("display","block")
-          .text(d.properties.LAU2 + ", " +
-          (Intl.NumberFormat('de-DEU').format(Math.round(d.properties.MWh))+ String(" MWh")));
-}
+  var tooltipText = d.properties.LAU2 + ", " + Intl.NumberFormat('de-DEU').format(Math.round(d.properties.MWh))+ String(" MWh");
+  if (tooltipText == ""){
+    tooltip.style("display", "none");
+  }
+  else{
+    tooltip.style("display","block")
+          .text(tooltipText);
+  }
+    
+ }
 
 //Move the tooltip to track the mouse
 function moveTooltip() {
   tooltip.style("top",(d3.event.pageY+tooltipOffset.y)+"px")
-      .style("left",(d3.event.pageX+tooltipOffset.x)+"px");
+          .style("left",(d3.event.pageX+tooltipOffset.x)+"px");
 }
 
 //Hide tooltip at start
@@ -82,4 +90,3 @@ function hideTooltip() {
   tooltip.style("display","none");
 }
 
-  
