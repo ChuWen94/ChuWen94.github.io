@@ -30,7 +30,8 @@ div.tooltip {
       font-weight: bold;
       font-size: small;
       padding: 4px 8px;
-      display: none;
+      width: auto;
+      height: auto;
   }
 
 a:link {

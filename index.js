@@ -67,8 +67,8 @@ function showTooltip(d) {
   moveTooltip();
 
   tooltip.style("display","block")
-      .text(d.properties.LAU2 + ", " +
-        (Intl.NumberFormat('de-DEU').format(Math.round(d.properties.MWh))+ String(" MWh")));
+          .text(d.properties.LAU2 + ", " +
+          (Intl.NumberFormat('de-DEU').format(Math.round(d.properties.MWh))+ String(" MWh")));
 }
 
 //Move the tooltip to track the mouse
