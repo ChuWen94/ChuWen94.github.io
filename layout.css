@@ -4,12 +4,13 @@ body {
     font-family: 'Roboto', sans-serif;
     padding: 2em;
     font-size: small;
-    text-align: justify;
 }
   
 
 p{
     padding-right: 2em;
+    text-align: justify;
+
 }
 path {
     stroke-width: 0.5px;
@@ -80,4 +81,9 @@ svg {
     display: block;
 }
 
+
+#legend {
+    padding: 20em;
+    float: right;
+}
 
