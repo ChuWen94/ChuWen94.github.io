@@ -33,6 +33,7 @@ div.tooltip {
       padding: 4px 8px;
       width: auto;
       height: auto;
+      display: none;
   }
 
 a:link {
