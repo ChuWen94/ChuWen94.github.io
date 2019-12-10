@@ -28,7 +28,7 @@ var features = svg.append("g")
     .attr("class","features");
 
 //Read and style Geodata
-d3.json("electr_estimates.geojson",function(error,geodata) {
+d3.json("electr_estimates_simplified.geojson",function(error,geodata) {
   if (error) return console.log(error); //unknown error, check the console
 
   
@@ -36,9 +36,6 @@ d3.json("electr_estimates.geojson",function(error,geodata) {
   var min_mwh = d3.min(geodata.features, function(d) { return d.properties.MWh});
   var mean_mwh = d3.mean(geodata.features, function(d) { return d.properties.MWh});
   var med_mwh = d3.median(geodata.features, function(d) { return d.properties.MWh});
-
-  var total_mwh = d3.sum(geodata.features, function(d) { return d.properties.MWh});
-
 
   var color = d3.scale.linear()
                         .domain([min_mwh, med_mwh, mean_mwh, max_mwh])
@@ -112,8 +109,6 @@ d3.json("electr_estimates.geojson",function(error,geodata) {
     //                   .attr("font-size", "x-small");
 
 });
-
-
 
 //Create tooltip
 var tooltip = d3.select("body").append("div").attr("class","tooltip");
