@@ -32,10 +32,10 @@ d3.json("electr_estimates_simplified.geojson",function(error,geodata) {
   if (error) return console.log(error); //unknown error, check the console
 
   
-  var max_mwh = d3.max(geodata.features, function(d) { return d.properties.MWh});
-  var min_mwh = d3.min(geodata.features, function(d) { return d.properties.MWh});
-  var mean_mwh = d3.mean(geodata.features, function(d) { return d.properties.MWh});
-  var med_mwh = d3.median(geodata.features, function(d) { return d.properties.MWh});
+  var max_mwh = Math.log10(d3.max(geodata.features, function(d) { return d.properties.MWh}));
+  var min_mwh = Math.log10(d3.min(geodata.features, function(d) { return d.properties.MWh}));
+  var mean_mwh = Math.log10(d3.mean(geodata.features, function(d) { return d.properties.MWh}));
+  var med_mwh = Math.log10(d3.median(geodata.features, function(d) { return d.properties.MWh}));
 
   var color = d3.scale.linear()
                         .domain([min_mwh, med_mwh, mean_mwh, max_mwh])
@@ -48,65 +48,78 @@ d3.json("electr_estimates_simplified.geojson",function(error,geodata) {
     .enter()
     .append("path")
     .attr("d",path)
+    .attr("id", "map")
     .on("mouseover",showTooltip)
     .on("mousemove",moveTooltip)
     .on("mouseout",hideTooltip)
     .attr("stroke", "black")
+    .attr("stroke-opacity", "0.7")
     .attr("fill", function(d) {
-      return color(d.properties.MWh); 
+      return color(Math.log10(d.properties.MWh)); 
       });
       
 
 
-    // //Legend
-    // var defs = svg.append("defs");             
+    //Legend
+    var defs = svg.append("defs");             
+    
+    var linearGradient = defs.append("linearGradient")
+                              .attr("id", "linear-gradient");
 
-    // var linearGradient = defs.append("linearGradient")
-    //                           .attr("id", "linear-gradient");
+    //Set the color for the start (0%)
+    linearGradient.append("stop")
+                  .attr("offset", "0%")
+                  .attr("stop-color", "#ffda66"); 
 
-    // //Set the color for the start (0%)
-    // linearGradient.append("stop")
-    //               .attr("offset", "0%")
-    //               .attr("stop-color", "#ffda66"); 
+    //Median
+    linearGradient.append("stop")
+        .attr("offset", "38.9%")
+        .attr("stop-color", "#ff9800"); 
 
-    // //Set the color for the median (50%)
-    // linearGradient.append("stop")
-    //               .attr("offset", "50%")
-    //               .attr("stop-color", "#ff9800"); 
+    //Mean
+    linearGradient.append("stop")
+        .attr("offset", "50.6%")
+        .attr("stop-color", "#f67828"); 
 
-    // //Set the color for the end (100%)
-    // linearGradient.append("stop")
-    //               .attr("offset", "100%")
-    //               .attr("stop-color", "#b60a1c"); 
+    //Set the color for the end (100%)
+    linearGradient.append("stop")
+                  .attr("offset", "100%")
+                  .attr("stop-color", "#b60a1c"); 
 
-    // linearGradient.attr("x1", "0%")
-    //               .attr("y1", "100%")
-    //               .attr("x2", "0%")
-    //               .attr("y2", "0%");
+    linearGradient.attr("x1", "0%")
+                  .attr("y1", "100%")
+                  .attr("x2", "0%")
+                  .attr("y2", "0%");
 
-    // svg.append("rect")
-    //     .attr("width", width/55)
-    //     .attr("height", height - height/2)
-    //     .attr("id", "legend")
-    //     .style("fill", "url(#linear-gradient)");
 
-    // // Text
+    svg.append("rect")
+        .attr("width", width/55-3)
+        .attr("height", height - height/2 -50)
+        .attr("id", "legend")
+        .attr("rx", 5)
+        .attr("ry", 5)
+        .attr("x", width-10)
+        .style("fill", "url(#linear-gradient)");
 
-    // var legend = svg.append("rect")
-    //                 .attr("width", width/30)
-    //                 .attr("height", height-height/2)
-    //                 .attr("fill", "white")
-    //                 .attr("x", 10)
-    //                 .style("text-anchor", "left");
+    //AXIS
+    var y = d3.scale.linear().range([0,  height-height/2 - 60]);
+    y.domain([max_mwh, min_mwh]);
+                   
+    var max_mwh_text = Math.round(d3.max(geodata.features, function(d) { return d.properties.MWh})/10000)*10000;
+    var min_mwh_text = Math.round(d3.min(geodata.features, function(d) { return d.properties.MWh}));
 
-    // var max_string = Intl.NumberFormat('de-DEU').format((Math.round(max_mwh/1000))*1000) + String(" MWh");
+    let tickLabels = [max_mwh_text, 10000, 500, min_mwh_text];
 
-    // var text = svg.append("text")
-    //                   .text(max_string)
-    //                   .style("writing-mode", "vertical-lr")
-    //                   .attr('x', 20)
-    //                   .attr('fill', 'black')
-    //                   .attr("font-size", "x-small");
+    var yAxis = d3.svg.axis().scale(y)
+                      .orient("left").ticks(4)
+                      .tickValues([max_mwh, 4, 2.698970004, min_mwh])
+                      .tickFormat((d, i) => d3.format(",")(tickLabels[i]) + " MWh");
+
+    var g = svg.append("g")
+              .attr("class", "axis")
+              .style("fill", "#0a213e")
+              .call(yAxis)
+              .attr("transform", "translate(490, 6)");
 
 });
 
@@ -141,9 +154,3 @@ function moveTooltip() {
 function hideTooltip() {
   tooltip.style("display","none");
 }
-
-
-
-
-
-  

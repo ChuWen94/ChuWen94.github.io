@@ -85,5 +85,19 @@ svg {
 
 #legend {
     padding: 20em;
-    float: right;
 }
+
+.axis text { 
+    fill:  #0a213e;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    font-size: xx-small;
+
+  }
+  
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #0a213e;
+  }
+  
