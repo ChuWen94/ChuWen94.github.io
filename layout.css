@@ -36,7 +36,14 @@ div.tooltip {
       display: none;
   }
 
+#paper {
+    color:  #0a213e;
+    font-style: italic;
+}
+
+
 a:link {
+    color: #0a213e;
     text-decoration: none;
 }
 
@@ -45,10 +52,12 @@ a:visited {
 }
 
 a:hover {
+    color: #0a213e;
     text-decoration: underline;
 }
 
 a:active {
+    color: #0a213e;
     text-decoration: none;
 }
 
