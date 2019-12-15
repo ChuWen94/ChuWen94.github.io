@@ -4,10 +4,6 @@ body {
     font-family: 'Roboto', sans-serif;
     padding: 2em;
     font-size: small;
-
-    opacity: 0;
-    transition: opacity 6s;
-    -webkit-transition: opacity 6s; /* Safari */
 } 
   
 
@@ -99,6 +95,7 @@ svg {
 #legend {
     padding: 20em;
 }
+
 
 .axis text { 
     fill:  #0a213e;

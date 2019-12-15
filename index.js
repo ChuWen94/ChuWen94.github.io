@@ -114,7 +114,6 @@ d3.json("electr_estimates_simplified.geojson",function(error,geodata) {
     .enter()
     .append("path")
     .attr("d",path)
-    .attr("id", "map")
     .on("mouseover",showTooltip)
     .on("mousemove",moveTooltip)
     .on("mouseout",hideTooltip)
