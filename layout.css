@@ -4,7 +4,11 @@ body {
     font-family: 'Roboto', sans-serif;
     padding: 2em;
     font-size: small;
-}
+
+    opacity: 0;
+    transition: opacity 6s;
+    -webkit-transition: opacity 6s; /* Safari */
+} 
   
 
 p{
