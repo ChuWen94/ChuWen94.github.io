@@ -1,3 +1,5 @@
+document.querySelector("body").style.visibility = "hidden"; 
+
 //Map dimensions (in pixels)
 var width = 500;
 var height = 500;
@@ -114,19 +116,22 @@ d3.json("electr_estimates_simplified.geojson",function(error,geodata) {
     .enter()
     .append("path")
     .attr("d",path)
+    .attr("id", "map")
     .on("mouseover",showTooltip)
     .on("mousemove",moveTooltip)
     .on("mouseout",hideTooltip)
     .attr("stroke", "black")
     .attr("stroke-opacity", "0.7")
+    .attr("onloaded", stop_loading)
     .attr("fill", function(d) {
       return color(Math.log10(d.properties.MWh)); 
       });
-      
-
-
-   
 });
+
+function stop_loading(){
+    document.querySelector("#loader").style.display = "none"; 
+    document.querySelector("body").style.visibility = "visible"; 
+};
 
 //Create tooltip
 var tooltip = d3.select("body").append("div").attr("class","tooltip");
