@@ -33,8 +33,10 @@ div.tooltip {
       padding: 4px 8px;
       width: auto;
       height: auto;
+      overflow-wrap: break-word;
       display: none;
   }
+
 
 #paper {
     color:  #0a213e;
