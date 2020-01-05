@@ -147,6 +147,9 @@ function showTooltip(d) {
   if (tooltipText == ""){
     tooltip.style("display", "none");
   }
+  if (tooltipText.includes("null")){
+    tooltip.style("display", "none");
+  }
   else{
     tooltip.style("display","block")
           .text(tooltipText);
